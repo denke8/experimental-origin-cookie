@@ -1,25 +1,19 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+import { v4 as uuid } from "uuid";
+
+const generateUniqueDomain = () => {
+  const [rnd] = uuid().split("-");
+
+  return `e2etest-${rnd}.loc`.toLowerCase();
+};
+
+Cypress.Commands.add("resetTestingEnv", ({ randomBaseUrl } = {}) => {
+  const domain = randomBaseUrl
+    ? generateUniqueDomain()
+    : Cypress.env("CYPRESS_WP_BASE_DOMAIN");
+
+  const baseUrl = `http://${domain}`;
+
+  return cy
+    .exec(`scripts/reset_testing_env.sh --base ${domain}`)
+    .then(() => baseUrl);
+});

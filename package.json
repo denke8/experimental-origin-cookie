@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Small project for quickly testing Cypress.io test runner",
   "scripts": {
-    "cypress:run": "cypress run",
-    "cypress:open": "cypress open",
+    "prepare:containers": "scripts/prepare_testing_env.sh",
+    "destroy:containers": "scripts/destroy_testing_env.sh",
+    "cypress:run": "cypress run --browser chrome",
+    "cypress:open": "cypress open --browser chrome",
     "cypress:verify": "cypress verify",
     "cypress:version": "cypress version",
     "cypress:info": "cypress info",
@@ -17,7 +19,10 @@
   "author": "Gleb Bahmutov <gleb@cypress.io>",
   "license": "ISC",
   "devDependencies": {
-    "ok-file": "1.5.2"
+    "cypress": "^10.4.0",
+    "dotenv": "^16.0.1",
+    "ok-file": "1.5.2",
+    "uuid": "^8.3.2"
   },
   "repository": {
     "type": "git",
