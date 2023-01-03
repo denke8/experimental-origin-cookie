@@ -12,7 +12,6 @@ module.exports = defineConfig({
   },
   e2e: {
     setupNodeEvents: setupPlugins,
-    experimentalSessionAndOrigin: true,
     // The installed WP baseUrl will change from test to test, but we need
     // this to match CYPRESS_WP_BASE_DOMAIN for cypress to even start
     baseUrl: "http://wp-plugin-e2e.loc/",
